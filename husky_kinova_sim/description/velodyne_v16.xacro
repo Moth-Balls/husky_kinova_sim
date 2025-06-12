@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!--##################################################################################-->
+<!-- NOT MINE. FROM https://github.com/ToyotaResearchInstitute/velodyne_simulator.git -->
+<!--##################################################################################-->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"> <!-- Changed robot name for clarity -->
+  <xacro:property name="M_PI" value="3.1415926535897931"/>
+
+  <!-- Default parameters for the VLP-16 sensor -->
+  <!-- Adjust these properties as needed when including this file, -->
+  <!-- or by overriding them in your main robot URDF. -->
+  <xacro:property name="velodyne_parent_link" value="sensor_arch_link"/> <!-- Default parent link -->
+  <xacro:property name="velodyne_name" value="velodyne"/> <!-- Base name for links and sensor -->
+  <xacro:property name="velodyne_topic" value="/scan"/> <!-- Default Gazebo topic -->
+  <xacro:property name="velodyne_hz" value="10"/>
+  <xacro:property name="velodyne_lasers" value="16"/>
+  <xacro:property name="velodyne_samples" value="1875"/>
+  <!-- <xacro:property name="velodyne_collision_range" value="0.3"/> Not used in current snippet -->
+  <xacro:property name="velodyne_min_range" value="0.5"/>
+  <xacro:property name="velodyne_max_range" value="130.0"/>
+  <xacro:property name="velodyne_noise" value="0.008"/>
+  <xacro:property name="velodyne_min_angle" value="-${M_PI}"/>
+  <xacro:property name="velodyne_max_angle" value="${M_PI}"/>
+  <xacro:property name="velodyne_gpu" value="true"/>
+
+  <!-- Default origin for mounting the Velodyne. Adjust as needed. -->
+  <xacro:property name="velodyne_mount_origin_xyz" value="0 0 0"/>
+  <xacro:property name="velodyne_mount_origin_rpy" value="0 0 0"/>
+
+  <joint name="${velodyne_name}_base_mount_joint" type="fixed">
+    <origin xyz="${velodyne_mount_origin_xyz}" rpy="${velodyne_mount_origin_rpy}"/>
+    <parent link="${velodyne_parent_link}"/>
+    <child link="${velodyne_name}_base_link"/>
+  </joint>
+
+  <link name="${velodyne_name}_base_link">
+    <inertial>
+      <mass value="0.83"/>
+      <origin xyz="0 0 0.03585"/>
+      <inertia ixx="${(0.83 * (3.0*0.0516*0.0516 + 0.0717*0.0717)) / 12.0}" ixy="0" ixz="0" iyy="${(0.83 * (3.0*0.0516*0.0516 + 0.0717*0.0717)) / 12.0}" iyz="0" izz="${0.5 * 0.83 * (0.0516*0.0516)}"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/velodyne_v16/VLP16_base_1.dae"/>
+      </geometry>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/velodyne_v16/VLP16_base_2.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.03585"/>
+      <geometry>
+        <cylinder radius="0.0516" length="0.0717"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="${velodyne_name}_base_scan_joint" type="fixed">
+    <origin xyz="0 0 0.0377" rpy="0 0 0"/>
+    <parent link="${velodyne_name}_base_link"/>
+    <child link="${velodyne_name}"/> <!-- Link for the scanning part -->
+  </joint>
+
+  <link name="${velodyne_name}"> <!-- This link is where the sensor is attached -->
+    <inertial>
+      <mass value="0.01"/> <!-- Mass of the scanning head, can be small -->
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1e-7" ixy="0" ixz="0" iyy="1e-7" iyz="0" izz="1e-7"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.0377"/> <!-- Adjust visual origin to match mesh -->
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/velodyne_v16/VLP16_scan.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0377"/>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/velodyne_v16/VLP16_scan.dae"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Gazebo sensor block for Gazebo Harmonic -->
+  <gazebo reference="${velodyne_name}">
+      <sensor name="${velodyne_name}_sensor" type="gpu_lidar">
+        <pose>0 0 0 0 0 0</pose> <!-- Pose relative to the ${velodyne_name} link -->
+        <topic>${velodyne_topic}</topic> <!-- Gazebo Transport topic -->
+        <gz_frame_id>${velodyne_name}</gz_frame_id> <!-- Frame ID for the Gazebo message -->
+        <update_rate>${velodyne_hz}</update_rate>
+        <visualize>true</visualize>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>${velodyne_samples}</samples>
+              <resolution>1</resolution>
+              <min_angle>${velodyne_min_angle}</min_angle>
+              <max_angle>${velodyne_max_angle}</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>${velodyne_lasers}</samples>
+              <resolution>1</resolution>
+              <min_angle>-${15.0*M_PI/180.0}</min_angle> <!-- VLP-16 typical vertical min angle (-15 deg) -->
+              <max_angle>${15.0*M_PI/180.0}</max_angle>  <!-- VLP-16 typical vertical max angle (+15 deg) -->
+            </vertical>
+          </scan>
+          <range>
+            <min>${velodyne_min_range}</min>
+            <max>${velodyne_max_range}</max>
+            <resolution>0.001</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>${velodyne_noise}</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+  </gazebo>
+</robot>

@@ -1,0 +1,239 @@
+<?xml version="1.0" ?>
+<robot name="husky" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Define materials -->
+  <material name="Black">
+    <color rgba="0.1 0.1 0.1 1.0"/>
+  </material>
+  <material name="DarkGrey">
+    <color rgba="0.3 0.3 0.3 1.0"/>
+  </material>
+  <material name="Yellow">
+    <color rgba="0.8 0.8 0.0 1.0"/>
+  </material>
+  <material name="Blue">
+    <color rgba="0.0 0.0 0.5 1.0"/>
+  </material>
+
+  <!-- Base footprint -->
+  <!--<link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0.14493" rpy="0 0 0"/>
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint> -->
+
+  <!-- Base link -->
+  <link name="base_link">
+    <visual>
+      <!--<origin rpy="0 0 0" xyz="0 0 0"/>-->
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/base_link.STL"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    <collision>
+      <!--<origin rpy="0 0 0" xyz="0 0 0"/>-->
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/base_link.STL"/>
+        <!--<box size="0.515 0.515 0.1"/>-->
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="33.455"/>
+      <origin xyz="-0.08748 -0.00085 0.09947"/>
+      <inertia ixx="0.6022" ixy="-0.02364" ixz="-0.1197" iyy="1.7386" iyz="-0.001544" izz="2.0296"/>
+    </inertial>
+  </link>
+
+  <!-- IMU -->
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <origin rpy="$(optenv HUSKY_IMU_RPY 0 -1.5708 3.1416)" xyz="$(optenv HUSKY_IMU_XYZ 0.19 0 0.149)"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+  </joint>
+
+  <!-- Wheels -->
+  <xacro:macro name="wheel_link" params="name xyz rpy">
+    <link name="${name}">
+      <inertial>
+        <mass value="2.637"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.02467" ixy="0" ixz="0" iyy="0.02467" iyz="0" izz="0.04411"/>
+      </inertial>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find husky_kinova_sim)/meshes/wheel.STL"/>
+        </geometry>
+        <material name="DarkGrey"/>
+      </visual>
+      <collision>
+        <origin rpy="1.57079633 0 0" xyz="0 0 0"/>
+        <geometry>
+          <!--<mesh filename="file://$(find husky_kinova_sim)/meshes/wheel.STL"/> -->
+          <cylinder radius="0.165" length="0.12"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:wheel_link name="front_left_wheel_link" xyz="0.256 0.2854 0.03282" rpy="0 0 0"/>
+  <xacro:wheel_link name="front_right_wheel_link" xyz="0.256 -0.2854 0.03282" rpy="0 0 0"/>
+  <xacro:wheel_link name="rear_left_wheel_link" xyz="-0.256 0.2854 0.03282" rpy="0 0 0"/>
+  <xacro:wheel_link name="rear_right_wheel_link" xyz="-0.256 -0.2854 0.03282" rpy="0 0 0"/>
+
+  <joint name="front_left_wheel_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="0.256 0.2854 0.03282"/>
+    <parent link="base_link"/>
+    <child link="front_left_wheel_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <joint name="front_right_wheel_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="0.256 -0.2854 0.03282"/>
+    <parent link="base_link"/>
+    <child link="front_right_wheel_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="-0.256 0.2854 0.03282"/>
+    <parent link="base_link"/>
+    <child link="rear_left_wheel_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <origin rpy="0 0 0" xyz="-0.256 -0.2854 0.03282"/>
+    <parent link="base_link"/>
+    <child link="rear_right_wheel_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Top plate -->
+  <link name="top_plate_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/top_plate.STL"/>
+      </geometry>
+      <material name="Yellow"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/top_plate.STL"/> 
+       </geometry> 
+    </collision>
+  </link>
+  <joint name="top_plate" type="fixed">
+    <parent link="base_link"/>
+    <child link="top_plate_link"/>
+  </joint>
+
+  <!-- User rail -->
+  <link name="user_rail_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/user_rail.STL"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/user_rail.STL"/> 
+       </geometry> 
+    </collision>
+  </link>
+  <joint name="user_rail" type="fixed">
+    <origin rpy="0 0 0" xyz="0.272 0 0.245"/>
+    <parent link="base_link"/>
+    <child link="user_rail_link"/>
+  </joint>
+
+  <!-- Front bumper -->
+  <link name="front_bumper_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/bumper.STL"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/bumper.STL"/> 
+       </geometry> 
+    </collision>
+  </link>
+  <joint name="front_bumper" type="fixed">
+    <origin rpy="0 0 0" xyz="0.48 0 0.091"/>
+    <parent link="base_link"/>
+    <child link="front_bumper_link"/>
+  </joint>
+
+  <!-- Rear bumper -->
+  <link name="rear_bumper_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/bumper.STL"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/bumper.STL"/> 
+       </geometry> 
+    </collision>
+  </link>
+  <joint name="rear_bumper" type="fixed">
+    <origin rpy="0 0 3.14159" xyz="-0.48 0 0.091"/>
+    <parent link="base_link"/>
+    <child link="rear_bumper_link"/>
+  </joint>
+
+  <!-- Payload Plate -->
+  <link name="payload_plate_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/payload_plate.STL"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry> 
+         <mesh filename="file://$(find husky_kinova_sim)/meshes/payload_plate.STL"/> 
+      </geometry>
+    </collision>
+  </link>
+  <joint name="payload_plate_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.25"/>
+    <parent link="base_link"/>
+    <child link="payload_plate_link"/>
+  </joint>
+
+  <!-- Sensor Arch -->
+  <link name="sensor_arch_link">
+    <visual>
+      <origin rpy="0 0 3.14159265" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/510_mm_sensor_arch.STL"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.14159265" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find husky_kinova_sim)/meshes/510_mm_sensor_arch.STL"/> 
+      </geometry>
+    </collision>
+  </link>
+  <joint name="sensor_arch_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.32 0 0.51"/>
+    <parent link="payload_plate_link"/>
+    <child link="sensor_arch_link"/>
+  </joint>
+
+</robot>
