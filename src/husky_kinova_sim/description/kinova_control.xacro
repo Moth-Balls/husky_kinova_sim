@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<robot name="husky" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <!-- ROS2 Control Plugin Configuration - Gazebo System -->
+  <gazebo>
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+      <parameters>/home/ubuntu/husky_ws/install/kinova_arm/share/kinova_arm/config/ros2_controllers.yaml</parameters>
+      <!--<parameters>file://(kinova_arm)/config/ros2_controllers.yaml</parameters>-->
+    </plugin>
+  </gazebo>
+
+
+    <!-- Ros2 Control Defintion-->
+  <ros2_control name="kinova_gen3" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware> 
+
+    <joint name="joint_1">
+      <command_interface name="position"/>
+
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_2">
+      <command_interface name="position"/>
+
+      <state_interface name="position">
+        <param name="initial_value">-1.5</param>  <!-- -2.1905 -->
+      </state_interface>
+
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_3">
+      <command_interface name="position"/>
+
+      <state_interface name="position">
+        <param name="initial_value">-2.57</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_4">
+      <command_interface name="position"/>
+
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_5">
+      <command_interface name="position"/>
+
+      <state_interface name="position">
+        <param name="initial_value">-0.9122</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="joint_6">
+      <command_interface name="position"/>
+
+      <state_interface name="position">
+        <param name="initial_value">1.5794</param>
+      </state_interface>
+
+      <state_interface name="velocity"/>
+    </joint>
+
+  </ros2_control>
+
+  <!-- Transmission Elements for ROS2 Control -->
+  <xacro:macro name="ros2_control_transmission" params="joint_name">
+    <transmission name="${joint_name}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint_name}">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${joint_name}_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <!-- Apply transmission to Kinova arm joints -->
+  <xacro:ros2_control_transmission joint_name="joint_1"/>
+  <xacro:ros2_control_transmission joint_name="joint_2"/>
+  <xacro:ros2_control_transmission joint_name="joint_3"/>
+  <xacro:ros2_control_transmission joint_name="joint_4"/>
+  <xacro:ros2_control_transmission joint_name="joint_5"/>
+  <xacro:ros2_control_transmission joint_name="joint_6"/>
+
+</robot>
