@@ -12,7 +12,6 @@
     </plugin>
   </gazebo>
 
-
     <!-- Ros2 Control Defintion-->
   <ros2_control name="kinova_gen3" type="system">
     <hardware>
