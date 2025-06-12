@@ -1,9 +1,0 @@
-# Default initial positions for husky's ros2_control fake system
-
-initial_positions:
-  joint_1: 0
-  joint_2: -2.
-  joint_3: -2.57
-  joint_4: 0
-  joint_5: -0.9122
-  joint_6: 1.5794
