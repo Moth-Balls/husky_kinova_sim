@@ -8,7 +8,7 @@ Velodyne lidar point cloud topic is published on `/velodyne_points`. Camera imag
 
 1. Clone repo 
 
-```
+```bash
 mkdir -p ros2_ws/src
 
 cd ~/ros2_ws/src
@@ -20,14 +20,14 @@ git clone https://github.com/Moth-Balls/husky_kinova_sim.git
 
 This should install all the dependencies but I may have missed one.
 
-```
+```bash
 sudo apt-get install ros-humble-gz-ros2-control ros-humble-ros-gz ros-humble-ros-gz-bridge ros-humble-moveit
 ```
 
 Sometimes rosdep works but it may still miss some.
 
 
-```
+```bash
 rosdep update
 
 rosdep install --from-paths src --ignore-src -y
@@ -35,7 +35,7 @@ rosdep install --from-paths src --ignore-src -y
 
 3. Building
 
-```
+```bash
 cd ~/ros2_ws
 
 colcon build --symlink-install
@@ -47,12 +47,12 @@ source install/setup.bash
 
 You can launch an empty world with this command.
 
-```
+```bash
 ros2 launch husky_kinova_sim husky_kinova_empty.launch.py
 ```
 
 Headless world with green objects can be launched as well.
 
-```
+```bash
 ros2 launch husky_kinova_sim husky_kinova_headless.launch.py
 ```
