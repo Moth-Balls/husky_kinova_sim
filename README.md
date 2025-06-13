@@ -13,7 +13,7 @@ mkdir -p ros2_ws/src
 
 cd ~/ros2_ws/src
 
-git clone https://github.com/Moth-Balls/husky_kinova_sim.git
+git clone -b jazzy https://github.com/Moth-Balls/husky_kinova_sim.git
 ```
 
 2. Install dependecies
@@ -21,7 +21,7 @@ git clone https://github.com/Moth-Balls/husky_kinova_sim.git
 This should install all the dependencies but I may have missed one.
 
 ```bash
-sudo apt-get install ros-humble-gz-ros2-control ros-humble-ros-gz ros-humble-ros-gz-bridge ros-humble-moveit
+sudo apt-get install ros-jazzy-gz-ros2-control ros-jazzy-ros-gz ros-jazzy-ros-gz-bridge ros-jazzy-moveit
 ```
 
 Sometimes rosdep works but it may still miss some.
