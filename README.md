@@ -13,7 +13,7 @@ mkdir -p ros2_ws/src
 
 cd ~/ros2_ws/src
 
-git clone https://github.com/Moth-Balls/husky_kinova_sim.git
+git clone -b humble https://github.com/Moth-Balls/husky_kinova_sim.git
 ```
 
 2. Install dependecies
