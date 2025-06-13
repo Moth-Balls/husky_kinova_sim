@@ -1,5 +1,5 @@
 # husky_kinova_sim
-* 1. Clone repo 
+1. Clone repo 
 
 ```
 mkdir -p ros2_ws/src
@@ -9,7 +9,7 @@ cd ~/ros2_ws/src
 git clone https://github.com/Moth-Balls/husky_kinova_sim.git
 ```
 
-* 2. Install dependecies
+2. Install dependecies
 
 This should install all the dependencies but I may have missed one.
 
@@ -26,7 +26,7 @@ rosdep update
 rosdep install --from-paths src --ignore-src -y
 ```
 
-* 3. Building
+1. Building
 
 ```
 cd ~/ros2_ws
@@ -36,7 +36,7 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
-* 4. Launching 
+1. Launching 
 
 You can launch an empty world with this command.
 
