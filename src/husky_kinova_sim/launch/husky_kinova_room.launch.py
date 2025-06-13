@@ -13,7 +13,7 @@ def generate_launch_description():
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     robotXacroName='husky'
-    namePackage = 'husky_kinova_sim'
+    namePackage = 'husky_bringup'
     kinova_arm_package = 'kinova_arm' 
     modelFileRelativePath = 'description/husky.urdf.xacro'
     worldFileRelativePath = 'worlds/room.world'

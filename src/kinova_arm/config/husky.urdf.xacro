@@ -3,7 +3,7 @@
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
 
     <!-- Import husky urdf file -->
-    <xacro:include filename="$(find husky_kinova_sim)/description/husky.urdf.xacro" />
+    <xacro:include filename="$(find husky_bringup)/description/husky.urdf.xacro" />
 
     <!-- Import control_xacro -->
     <xacro:include filename="husky.ros2_control.xacro" />

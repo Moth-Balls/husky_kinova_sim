@@ -6,6 +6,7 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from moveit_configs_utils import MoveItConfigsBuilder
 import yaml
+from launch.conditions import IfCondition  # Import IfCondition
 
 
 def generate_launch_description():
@@ -18,11 +19,19 @@ def generate_launch_description():
             description="Use simulation (Gazebo) clock if true",
         )
     )
+    declared_arguments.append(  # Add this argument
+        DeclareLaunchArgument(
+            "load_controllers",
+            default_value="true",
+            description="Load controllers (if false, assumes they are loaded elsewhere)",
+        )
+    )
     # Add other arguments if needed, e.g., for RViz, specific robot model
     # For simplicity, focusing on move_group and use_sim_time
 
     # LaunchConfiguration variables
     use_sim_time_lc = LaunchConfiguration("use_sim_time")
+    load_controllers_lc = LaunchConfiguration("load_controllers")  # Get the value
 
     # This OpaqueFunction is used to resolve LaunchConfigurations to strings when needed for paths
     def configure_move_group(context):
@@ -111,6 +120,26 @@ def generate_launch_description():
                     joint_values[joint_name] = joint_value
                 break  # Stop after finding the "default" group state
 
+        nodes = []  # Create a list to hold the nodes
+
+        # Conditionally spawn the controllers
+        from launch_ros.actions import Node  # Move import here to avoid circular dependency
+        joint_state_broadcaster_spawner = Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+            condition=IfCondition(load_controllers_lc)  # Use the LaunchConfiguration
+        )
+        nodes.append(joint_state_broadcaster_spawner)
+
+        arm_controller_spawner = Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=["arm_controller", "--controller-manager", "/controller_manager"],
+            condition=IfCondition(load_controllers_lc)  # Use the LaunchConfiguration
+        )
+        nodes.append(arm_controller_spawner)
+
         # Create move_group node
         move_group_node = Node(
             package="moveit_ros_move_group",
@@ -124,11 +153,9 @@ def generate_launch_description():
                 {'start_state': joint_values},  # Set the start state to the "default" pose
             ],
         )
+        nodes.append(move_group_node)  # Add move_group_node to the list
 
-        # If you want to launch RViz from here, you would define its Node here too,
-        # similar to the example, passing use_sim_time_lc to it.
-
-        return [move_group_node]  # Add rviz_node here if launching RViz
+        return nodes  # Return the list of nodes
 
     ld = LaunchDescription(declared_arguments)
     ld.add_action(OpaqueFunction(function=configure_move_group))

@@ -13,7 +13,7 @@ find_package(ros_gz_bridge REQUIRED)
 
 
 INSTALL(DIRECTORY
-  launch meshes worlds description config
+  launch meshes worlds description  
   DESTINATION share/${PROJECT_NAME}/
 )
 
