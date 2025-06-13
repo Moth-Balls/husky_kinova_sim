@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<robot>
+<!-- Base link -->
+<gazebo reference="base_link">
+ <!-- <mu1>0.2</mu1> -->
+ <!-- <mu2>0.2</mu2> -->
+  <material>Gazebo/DarkGrey</material>
+</gazebo>
+
+<!-- Wheels -->
+<gazebo reference="front_left_wheel_link">
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <material>Gazebo/Grey</material>
+</gazebo>
+<gazebo reference="front_right_wheel_link">
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <material>Gazebo/Grey</material>
+</gazebo>
+<gazebo reference="rear_left_wheel_link">
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <material>Gazebo/Grey</material>
+</gazebo>
+<gazebo reference="rear_right_wheel_link">
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <material>Gazebo/Grey</material>
+</gazebo>
+
+<!-- Top plate -->
+<gazebo reference="top_plate_link">
+  <material>Gazebo/Yellow</material>
+</gazebo>
+
+<!-- User rail -->
+<gazebo reference="user_rail_link">
+  <material>Gazebo/DarkGrey</material>
+</gazebo>
+
+<!-- Front bumper -->
+<gazebo reference="front_bumper_link">
+  <material>Gazebo/DarkGrey</material>
+</gazebo>
+
+<!-- Rear bumper -->
+<gazebo reference="rear_bumper_link">
+  <material>Gazebo/DarkGrey</material>
+</gazebo>
+
+<gazebo>
+
+<!-- Diff Drive Plugin -->
+<plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+
+<!-- Wheels -->
+  <left_joint>front_left_wheel_joint</left_joint>
+  <left_joint>rear_left_wheel_joint</left_joint>
+  <right_joint>front_right_wheel_joint</right_joint>
+  <right_joint>rear_right_wheel_joint</right_joint>
+
+<!-- Kinematics -->
+  <wheel_separation>0.5708</wheel_separation>
+  <wheel_radius>0.17775</wheel_radius>
+
+<!-- Limits -->
+  <max_linear_accleration>10</max_linear_accleration>
+
+<!-- Topics, Frames, and Odomotry-->
+  <topic>cmd_vel</topic>
+  <tf_topic>/tf</tf_topic>
+  <odom_topic>odom</odom_topic>
+  <frame_id>odom</frame_id>
+  <child_frame_id>base_link</child_frame_id>
+  <odom_publisher_frequency>30</odom_publisher_frequency>
+</plugin>
+
+<!-- Joint State Publisher Plugin -->
+<plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+  <topic>joint_states</topic>
+  <joint_name>front_left_wheel_joint</joint_name>
+  <joint_name>rear_left_wheel_joint</joint_name>
+  <joint_name>front_right_wheel_joint</joint_name>
+  <joint_name>rear_right_wheel_joint</joint_name>
+</plugin>
+
+</gazebo>
+
+</robot>
