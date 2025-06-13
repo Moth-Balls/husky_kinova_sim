@@ -26,7 +26,7 @@ rosdep update
 rosdep install --from-paths src --ignore-src -y
 ```
 
-1. Building
+3. Building
 
 ```
 cd ~/ros2_ws
@@ -36,7 +36,7 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
-1. Launching 
+4. Launching 
 
 You can launch an empty world with this command.
 
