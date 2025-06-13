@@ -10,7 +10,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/arm_base.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/arm_base.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -19,7 +19,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/arm_base.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/arm_base.STL" />
       </geometry>
     </collision>
   </link>
@@ -39,7 +39,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/shoulder_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/shoulder_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -48,7 +48,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/shoulder_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/shoulder_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -70,7 +70,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/bicep_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/bicep_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -79,7 +79,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/bicep_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/bicep_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -101,7 +101,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/forearm_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/forearm_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -110,7 +110,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/forearm_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/forearm_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -133,7 +133,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/spherical_wrist_1_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/spherical_wrist_1_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -142,7 +142,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/spherical_wrist_1_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/spherical_wrist_1_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -164,7 +164,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/spherical_wrist_2_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/spherical_wrist_2_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -173,7 +173,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/spherical_wrist_2_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/spherical_wrist_2_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -195,7 +195,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/bracelet_with_vision_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/bracelet_with_vision_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -204,7 +204,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_bringup)/meshes/kinova/bracelet_with_vision_link.STL" />
+        <mesh filename="package://husky_kinova_sim/meshes/kinova/bracelet_with_vision_link.STL" />
       </geometry>
     </collision>
   </link>
