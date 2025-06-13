@@ -1,4 +1,11 @@
 # husky_kinova_sim
+Simple simulator for Clearpath Husky A200 that has a Kinova Gen3 arm, Velodyne VLP 16 lidar, and Omni 60 camera. 
+
+![Husky Kinova Robot](husky_kinova.png)
+
+Velodyne lidar point cloud topic is published on `/velodyne_points`. Camera image topics are published on `/camera0/image_raw`, `/camera1/image_raw`, etc, for all 5 cameras. 
+
+
 1. Clone repo 
 
 ```
