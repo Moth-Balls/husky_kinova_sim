@@ -120,7 +120,7 @@
     <parent link="bicep_link" />
     <child link="forearm_link" />
     <axis xyz="0 0 1" />
-    <limit lower="-2.57" upper="2.57" effort="39" velocity="1.3963" acceleration="1.0"/>  <!-- Added acceleration limit -->
+    <limit effort="39" velocity="1.3963" acceleration="1.0"/>  <!-- Added acceleration limit -->
   </joint>
 
 

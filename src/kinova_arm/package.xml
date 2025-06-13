@@ -6,7 +6,7 @@
   <description>
      An automatically generated package with all the configuration and launch files for using the husky with the MoveIt Motion Planning Framework
   </description>
-  <maintainer email="blah@gmail.com">isaac</maintainer>
+  <maintainer email="blah@gmail.com">blah</maintainer>
 
   <license>BSD-3-Clause</license>
 
@@ -14,7 +14,7 @@
   <url type="bugtracker">https://github.com/moveit/moveit2/issues</url>
   <url type="repository">https://github.com/moveit/moveit2</url>
 
-  <author email="blah@gmail.com">isaac</author>
+  <author email="blah@gmail.com">blah</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
@@ -28,8 +28,8 @@
   <exec_depend>xacro</exec_depend>
   <!-- The next 2 packages are required for the gazebo simulation.
        We don't include them by default to prevent installing gazebo and all its dependencies. -->
-  <exec_depend>gazebo_ros</exec_depend>
-  <exec_depend>ros2_control</exec_depend>
+  <!-- <exec_depend>joint_trajectory_controller</exec_depend> -->
+  <!-- <exec_depend>gazebo_ros_control</exec_depend> -->
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>husky_bringup</exec_depend>
   <exec_depend>moveit_configs_utils</exec_depend>
@@ -42,7 +42,6 @@
   <exec_depend>rviz_default_plugins</exec_depend>
   <exec_depend>tf2_ros</exec_depend>
   <exec_depend>xacro</exec_depend>
-  <exec_depend>joint_trajectory_controller</exec_depend>
 
 
   <export>
