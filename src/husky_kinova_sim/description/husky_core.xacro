@@ -29,14 +29,14 @@
     <visual>
       <!--<origin rpy="0 0 0" xyz="0 0 0"/>-->
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/base_link.STL"/>
+        <mesh filename="file://$(find husky_bringup)/meshes/base_link.STL"/>
       </geometry>
       <material name="Black"/>
     </visual>
     <collision>
       <!--<origin rpy="0 0 0" xyz="0 0 0"/>-->
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/base_link.STL"/>
+        <mesh filename="file://$(find husky_bringup)/meshes/base_link.STL"/>
         <!--<box size="0.515 0.515 0.1"/>-->
       </geometry>
     </collision>
@@ -66,14 +66,14 @@
       <visual>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <geometry>
-          <mesh filename="file://$(find husky_kinova_sim)/meshes/wheel.STL"/>
+          <mesh filename="file://$(find husky_bringup)/meshes/wheel.STL"/>
         </geometry>
         <material name="DarkGrey"/>
       </visual>
       <collision>
         <origin rpy="1.57079633 0 0" xyz="0 0 0"/>
         <geometry>
-          <!--<mesh filename="file://$(find husky_kinova_sim)/meshes/wheel.STL"/> -->
+          <!--<mesh filename="file://$(find husky_bringup)/meshes/wheel.STL"/> -->
           <cylinder radius="0.165" length="0.12"/>
         </geometry>
       </collision>
@@ -114,14 +114,14 @@
   <link name="top_plate_link">
     <visual>
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/top_plate.STL"/>
+        <mesh filename="file://$(find husky_bringup)/meshes/top_plate.STL"/>
       </geometry>
       <material name="Yellow"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
        <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/top_plate.STL"/> 
+        <mesh filename="file://$(find husky_bringup)/meshes/top_plate.STL"/> 
        </geometry> 
     </collision>
   </link>
@@ -134,14 +134,14 @@
   <link name="user_rail_link">
     <visual>
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/user_rail.STL"/>
+        <mesh filename="file://$(find husky_bringup)/meshes/user_rail.STL"/>
       </geometry>
       <material name="DarkGrey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
        <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/user_rail.STL"/> 
+        <mesh filename="file://$(find husky_bringup)/meshes/user_rail.STL"/> 
        </geometry> 
     </collision>
   </link>
@@ -155,14 +155,14 @@
   <link name="front_bumper_link">
     <visual>
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/bumper.STL"/>
+        <mesh filename="file://$(find husky_bringup)/meshes/bumper.STL"/>
       </geometry>
       <material name="DarkGrey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
        <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/bumper.STL"/> 
+        <mesh filename="file://$(find husky_bringup)/meshes/bumper.STL"/> 
        </geometry> 
     </collision>
   </link>
@@ -176,14 +176,14 @@
   <link name="rear_bumper_link">
     <visual>
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/bumper.STL"/>
+        <mesh filename="file://$(find husky_bringup)/meshes/bumper.STL"/>
       </geometry>
       <material name="DarkGrey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
        <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/bumper.STL"/> 
+        <mesh filename="file://$(find husky_bringup)/meshes/bumper.STL"/> 
        </geometry> 
     </collision>
   </link>
@@ -197,14 +197,14 @@
   <link name="payload_plate_link">
     <visual>
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/payload_plate.STL"/>
+        <mesh filename="file://$(find husky_bringup)/meshes/payload_plate.STL"/>
       </geometry>
       <material name="DarkGrey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
        <geometry> 
-         <mesh filename="file://$(find husky_kinova_sim)/meshes/payload_plate.STL"/> 
+         <mesh filename="file://$(find husky_bringup)/meshes/payload_plate.STL"/> 
       </geometry>
     </collision>
   </link>
@@ -219,14 +219,14 @@
     <visual>
       <origin rpy="0 0 3.14159265" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/510_mm_sensor_arch.STL"/>
+        <mesh filename="file://$(find husky_bringup)/meshes/510_mm_sensor_arch.STL"/>
       </geometry>
       <material name="DarkGrey"/>
     </visual>
     <collision>
       <origin rpy="0 0 3.14159265" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/510_mm_sensor_arch.STL"/> 
+        <mesh filename="file://$(find husky_bringup)/meshes/510_mm_sensor_arch.STL"/> 
       </geometry>
     </collision>
   </link>

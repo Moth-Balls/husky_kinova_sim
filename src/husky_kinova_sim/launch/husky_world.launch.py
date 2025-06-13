@@ -12,7 +12,7 @@ def generate_launch_description():
     robotXacroName='husky'
 
     # Name of package
-    namePackage = 'husky_kinova_sim'
+    namePackage = 'husky_bringup'
 
     # Relative path to the xacro file defining the model
     modelFileRelativePath = 'description/husky.urdf.xacro'

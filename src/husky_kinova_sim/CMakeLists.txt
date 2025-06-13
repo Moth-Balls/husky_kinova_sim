@@ -9,10 +9,11 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(xacro REQUIRED)
-find_package(ros_gz_sim REQUIRED)
+find_package(ros_gz_bridge REQUIRED)
+
 
 INSTALL(DIRECTORY
-  launch meshes worlds description config 
+  launch meshes worlds description  
   DESTINATION share/${PROJECT_NAME}/
 )
 

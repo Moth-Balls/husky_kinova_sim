@@ -10,7 +10,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/arm_base.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/arm_base.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -19,7 +19,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/arm_base.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/arm_base.STL" />
       </geometry>
     </collision>
   </link>
@@ -39,7 +39,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/shoulder_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/shoulder_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -48,7 +48,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/shoulder_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/shoulder_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -58,7 +58,7 @@
     <parent link="arm_base" />
     <child link="shoulder_link" />
     <axis xyz="0 0 1" />
-    <limit effort="39" velocity="1.3963" acceleration="1.0"/>
+    <limit effort="39" velocity="1.3963" acceleration="1.0"/>  <!-- Added acceleration limit -->
   </joint>
 
   <link name="bicep_link">
@@ -70,7 +70,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/bicep_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/bicep_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -79,7 +79,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/bicep_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/bicep_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -89,7 +89,7 @@
     <parent link="shoulder_link" />
     <child link="bicep_link" />
     <axis xyz="0 0 1" />
-    <limit lower="-2.24" upper="2.24" effort="39" velocity="1.3963" acceleration="1.0"/> 
+    <limit lower="-2.24" upper="2.24" effort="39" velocity="1.3963" acceleration="1.0"/>  <!-- Added acceleration limit -->
   </joint>
 
   <link name="forearm_link">
@@ -101,7 +101,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/forearm_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/forearm_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -110,7 +110,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/forearm_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/forearm_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -120,7 +120,7 @@
     <parent link="bicep_link" />
     <child link="forearm_link" />
     <axis xyz="0 0 1" />
-    <limit lower="-2.57" upper="2.57" effort="39" velocity="1.3963" acceleration="1.0"/>
+    <limit lower="-2.57" upper="2.57" effort="39" velocity="1.3963" acceleration="1.0"/>  <!-- Added acceleration limit -->
   </joint>
 
 
@@ -133,7 +133,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/spherical_wrist_1_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/spherical_wrist_1_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -142,7 +142,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/spherical_wrist_1_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/spherical_wrist_1_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -152,7 +152,7 @@
     <parent link="forearm_link" />
     <child link="spherical_wrist_1_link" />
     <axis xyz="0 0 1" />
-    <limit effort="9" velocity="1.2218" acceleration="1.0"/>
+    <limit effort="9" velocity="1.2218" acceleration="1.0"/>  <!-- Added acceleration limit -->
   </joint>
 
   <link name="spherical_wrist_2_link">
@@ -164,7 +164,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/spherical_wrist_2_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/spherical_wrist_2_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -173,7 +173,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/spherical_wrist_2_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/spherical_wrist_2_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -183,7 +183,7 @@
     <parent link="spherical_wrist_1_link" />
     <child link="spherical_wrist_2_link" />
     <axis xyz="0 0 1" />
-    <limit lower="-2.09" upper="2.09" effort="9" velocity="1.2218" acceleration="1.0"/>
+    <limit lower="-2.09" upper="2.09" effort="9" velocity="1.2218" acceleration="1.0"/>  <!-- Added acceleration limit -->
   </joint>
 
   <link name="bracelet_link">
@@ -195,7 +195,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/bracelet_with_vision_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/bracelet_with_vision_link.STL" />
       </geometry>
       <material name="">
         <color rgba="0.75294 0.75294 0.75294 1" />
@@ -204,7 +204,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="file://$(find husky_kinova_sim)/meshes/kinova/bracelet_with_vision_link.STL" />
+        <mesh filename="file://$(find husky_bringup)/meshes/kinova/bracelet_with_vision_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -214,7 +214,7 @@
     <parent link="spherical_wrist_2_link" />
     <child link="bracelet_link" />
     <axis xyz="0 0 1" />
-    <limit effort="9" velocity="1.2218" acceleration="1.0"/>  
+    <limit effort="9" velocity="1.2218" acceleration="1.0"/>  <!-- Added acceleration limit -->
   </joint>
 
   <link name="end_effector_link">
