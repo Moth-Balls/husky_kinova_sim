@@ -1,0 +1,137 @@
+- ros_topic_name: "clock"
+  gz_topic_name: "clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "gz.msgs.Clock"
+  direction: GZ_TO_ROS
+
+# gz topic published by JointState plugin
+- ros_topic_name: "joint_states"
+  gz_topic_name: "joint_states"
+  ros_type_name: "sensor_msgs/msg/JointState"
+  gz_type_name: "gz.msgs.Model"
+  direction: GZ_TO_ROS
+
+# gz topic published by DiffDrive plugin
+- ros_topic_name: "odom"
+  gz_topic_name: "odom"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+  direction: GZ_TO_ROS
+
+# gz topic published by DiffDrive plugin
+- ros_topic_name: "tf"
+  gz_topic_name: "tf"
+  ros_type_name: "tf2_msgs/msg/TFMessage"
+  gz_type_name: "gz.msgs.Pose_V"
+  direction: GZ_TO_ROS
+
+# gz topic subscribed to by DiffDrive plugin
+- ros_topic_name: "cmd_vel"
+  gz_topic_name: "cmd_vel"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "gz.msgs.Twist"
+  direction: ROS_TO_GZ
+
+# gz topic published by Sensors plugin
+- ros_topic_name: "/velodyne_points" 
+  gz_topic_name: "/scan/points" #Keep this as /scan since that is what the velodyne publishes to
+  ros_type_name: "sensor_msgs/msg/PointCloud2"  # Changed to PointCloud2
+  gz_type_name: "gz.msgs.PointCloudPacked"  # Changed to PointCloudPacked
+  direction: GZ_TO_ROS
+  
+# gz topic published by imu plugin
+- ros_topic_name: "/imu"
+  gz_topic_name: "imu"
+  ros_type_name: "sensor_msgs/msg/Imu"
+  gz_type_name: "gz.msgs.IMU"
+  direction: GZ_TO_ROS
+
+  # camera 0
+- ros_topic_name: "/camera0/image_raw"
+  gz_topic_name: "/sensors/camera0"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/camera0/camera_info"
+  gz_topic_name: "/sensors/camera0/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+  # camera 1
+- ros_topic_name: "/camera1/image_raw"
+  gz_topic_name: "/sensors/camera1"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+  
+- ros_topic_name: "/camera1/camera_info"
+  gz_topic_name: "/sensors/camera1/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+  # camera 2
+- ros_topic_name: "/camera2/image_raw"
+  gz_topic_name: "/sensors/camera2"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/camera2/camera_info"
+  gz_topic_name: "/sensors/camera2/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+  # camera 3
+- ros_topic_name: "/camera3/image_raw"
+  gz_topic_name: "/sensors/camera3"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/camera3/camera_info"
+  gz_topic_name: "/sensors/camera3/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+  # camera 4
+- ros_topic_name: "/camera4/image_raw"
+  gz_topic_name: "/sensors/camera4"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/camera4/camera_info"
+  gz_topic_name: "/sensors/camera4/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+  # omni 60 camera info topic
+- ros_topic_name: "/cameras_info"
+  gz_topic_name: "/sensors/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+  # realsense camera
+- ros_topic_name: "/realsense/image_raw"
+  gz_topic_name: "/sensors/realsense"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/realsense/camera_info"
+  gz_topic_name: "/sensors/realsense/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+
+
+
+
