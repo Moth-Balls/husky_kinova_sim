@@ -9,7 +9,8 @@
       <robot_param_node>robot_state_publisher</robot_param_node>
       <!--<parameters>/home/ubuntu/husky_ws/install/kinova_arm/share/kinova_arm/config/ros2_controllers.yaml</parameters>-->
       <!--<parameters>file://(kinova_arm)/config/ros2_controllers.yaml</parameters>-->
-      <parameters>/home/$USER/husky_ws/install/kinova_arm/share/kinova_arm/config/ros2_controllers.yaml</parameters>
+      <!--<parameters>/home/$USER/husky_ws/install/kinova_arm/share/kinova_arm/config/ros2_controllers.yaml</parameters>-->
+      <parameters>$(find kinova_arm)/config/ros2_controllers.yaml</parameters>
     </plugin>
   </gazebo>
 
