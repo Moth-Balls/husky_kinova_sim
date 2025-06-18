@@ -24,7 +24,7 @@ def generate_launch_description():
     controllers_yaml_path = os.path.join(
         get_package_share_directory(kinova_arm_package),
         "config",
-        "ros2_humble_controllers.yaml"
+        "ros2_controllers.yaml"
     )
 
     robotDescription = xacro.process_file(pathModelFile).toxml()
