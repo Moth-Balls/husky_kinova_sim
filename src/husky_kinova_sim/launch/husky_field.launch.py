@@ -18,7 +18,7 @@ def generate_launch_description():
     modelFileRelativePath = 'description/husky.urdf.xacro'
 
     # Relative path to the world file
-    worldFileRelativePath = 'worlds/room.world'
+    worldFileRelativePath = 'worlds/generated.world'
 
     # Absolute path to the robot model
     pathModelFile = os.path.join(get_package_share_directory(namePackage), modelFileRelativePath)

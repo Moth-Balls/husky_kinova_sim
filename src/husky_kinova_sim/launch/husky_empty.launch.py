@@ -1,4 +1,4 @@
-import os 
+import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
@@ -18,7 +18,7 @@ def generate_launch_description():
     modelFileRelativePath = 'description/husky.urdf.xacro'
 
     # Relative path to the world file
-    worldFileRelativePath = 'worlds/room.world'
+    worldFileRelativePath = 'worlds/empty.world'
 
     # Absolute path to the robot model
     pathModelFile = os.path.join(get_package_share_directory(namePackage), modelFileRelativePath)
@@ -33,7 +33,10 @@ def generate_launch_description():
     gazebo_rosPackagelaunch=PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'))
 
     # This is if you are using a custom world file
-    gazeboLaunch=IncludeLaunchDescription(gazebo_rosPackagelaunch, launch_arguments={'gz_args': ['-v4 -r ', pathWorldFile], 'on_exit_shutdown': "true"}.items())
+    gazeboLaunch=IncludeLaunchDescription(gazebo_rosPackagelaunch, launch_arguments={'gz_args': [' -r -v -v4 ', pathWorldFile], 'on_exit_shutdown': "true"}.items())
+
+    # This is if you are using the empty world file
+    #gazeboLaunch=IncludeLaunchDescription(gazebo_rosPackagelaunch, launch_arguments={'gz_args': [' -r -v -v4 empty.sdf'], 'on_exit_shutdown': "true"}.items())
 
     # Gazebo node
     spawnModelGazebo = Node(
@@ -42,8 +45,8 @@ def generate_launch_description():
         arguments=[
             '-name', robotXacroName,
             '-topic', 'robot_description',
-            '-x', '-4.5',
-            '-y', '4.5',
+            '-x', '0',
+            '-y', '0',
             '-z', '0.3',
     ],
     output='screen',
@@ -56,6 +59,14 @@ def generate_launch_description():
         output='screen',
         parameters=[{'robot_description': robotDescription,
         'use_sim_time': True}]
+    )
+
+    jointStatePublisher = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        output='screen',
+        parameters=[{'use_sim_time': True}]
     )
 
     bridge_params = os.path.join(
@@ -84,5 +95,6 @@ def generate_launch_description():
     # Add nodes
     launchDescriptionObject.add_action(spawnModelGazebo)
     launchDescriptionObject.add_action(robotStatePublisher)
+    launchDescriptionObject.add_action(jointStatePublisher)
     launchDescriptionObject.add_action(start_gazebo_ros_bridge_cmd)
     return launchDescriptionObject

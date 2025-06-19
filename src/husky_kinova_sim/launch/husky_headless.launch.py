@@ -33,7 +33,7 @@ def generate_launch_description():
     gazebo_rosPackagelaunch=PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'))
 
     # This is if you are using a custom world file
-    gazeboLaunch=IncludeLaunchDescription(gazebo_rosPackagelaunch, launch_arguments={'gz_args': ['-v4 -r ', pathWorldFile], 'on_exit_shutdown': "true"}.items())
+    gazeboLaunch=IncludeLaunchDescription(gazebo_rosPackagelaunch, launch_arguments={'gz_args': ['-v4 -s -r ', pathWorldFile], 'on_exit_shutdown': "true"}.items())
 
     # Gazebo node
     spawnModelGazebo = Node(
