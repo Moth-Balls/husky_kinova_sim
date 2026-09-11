@@ -37,7 +37,7 @@ def generate_launch_description():
     empty_yaml_path = os.path.join(
         get_package_share_directory(namePackage),
         'config',
-        'empty.yaml'  # <---- YOUR EMPTY YAML FILE
+        'empty.yaml'
     )
 
     gazeboLaunch=IncludeLaunchDescription(
@@ -45,7 +45,7 @@ def generate_launch_description():
         launch_arguments={
             'gz_args': [' -r -v4 ', pathWorldFile],
             'on_exit_shutdown': "true",
-            'initial_positions_file': empty_yaml_path  # <---- SET THE PARAMETER
+            'initial_positions_file': empty_yaml_path
         }.items()
     )
 
@@ -63,8 +63,8 @@ def generate_launch_description():
         arguments=[
             '-name', robotXacroName,
             '-topic', 'robot_description',
-            '-x', '0',
-            '-y', '0',
+            '-x', '-4.0',
+            '-y', '4.0',
             '-z', '0.3',
         ],
         output='screen',

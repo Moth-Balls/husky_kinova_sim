@@ -1,7 +1,8 @@
 import os
+from pathlib import Path
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, RegisterEventHandler
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, RegisterEventHandler, TimerAction, AppendEnvironmentVariable
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
@@ -14,12 +15,24 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     robotXacroName='husky'
     namePackage = 'husky_kinova_sim'
-    kinova_arm_package = 'kinova_arm' 
+    kinova_arm_package = 'kinova_arm'
     modelFileRelativePath = 'description/husky.urdf.xacro'
-    worldFileRelativePath = 'worlds/field.world'
-    pathModelFile = os.path.join(get_package_share_directory(namePackage), modelFileRelativePath)
-    pathWorldFile = os.path.join(get_package_share_directory(namePackage), worldFileRelativePath)
     
+    pathModelFile = os.path.join(get_package_share_directory(namePackage), modelFileRelativePath)
+
+    worldFileRelativePath = os.path.join(
+        'worlds', 'field_world', 'field.world'
+    )
+    pathWorldFile = os.path.join(
+        get_package_share_directory(namePackage), worldFileRelativePath
+    )
+
+    # Export model path for virtual_maize_field meshes
+    set_gazebo_models = AppendEnvironmentVariable(
+        name='GZ_SIM_RESOURCE_PATH',
+        value=os.path.join(get_package_share_directory('virtual_maize_field'), 'models')
+    )
+
     # Construct the path to ros2_controllers.yaml
     controllers_yaml_path = os.path.join(
         get_package_share_directory(kinova_arm_package),
@@ -33,9 +46,20 @@ def generate_launch_description():
         os.path.join(get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')
     )
 
+    # Get path to the empty YAML file
+    empty_yaml_path = os.path.join(
+        get_package_share_directory(namePackage),
+        'config',
+        'empty.yaml'
+    )
+
     gazeboLaunch=IncludeLaunchDescription(
         gazebo_rosPackagelaunch,
-        launch_arguments={'gz_args': [' -r -v4 ', pathWorldFile], 'on_exit_shutdown': "true"}.items()
+        launch_arguments={
+            'gz_args': [' -r -v4 ', pathWorldFile],
+            'on_exit_shutdown': "true",
+            'initial_positions_file': empty_yaml_path
+        }.items()
     )
 
     robotStatePublisher = Node(
@@ -52,11 +76,14 @@ def generate_launch_description():
         arguments=[
             '-name', robotXacroName,
             '-topic', 'robot_description',
-            '-x', '-8.0',
-            '-y', '8.0',
-            '-z', '0.5',
-    ],
-    output='screen',
+            '-x', '0.0',
+            '-y', '9.0',
+            '-z', '1.0',
+            '-R', '0.0',
+            '-P', '0.0',
+            '-Y', '-1.5708',
+        ],
+        output='screen',
     )
 
     # Spawner for Joint State Broadcaster
@@ -65,26 +92,26 @@ def generate_launch_description():
         executable="spawner",
         arguments=[
             "joint_state_broadcaster",
-            "--controller-manager", "/controller_manager", # Targets the CM from gz_ros2_control
+            "--controller-manager", "/controller_manager",
             "--ros-args",
-            "--params-file", controllers_yaml_path # Pass the YAML for parameters
+            "--params-file", controllers_yaml_path
         ],
         output="screen",
     )
 
-    # Spawner for Arm Controller
+    # Spawner for Arm Controller (delayed)
     arm_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[
             "arm_controller",
-            "--controller-manager", "/controller_manager", # Targets the CM from gz_ros2_control
+            "--controller-manager", "/controller_manager",
             "--ros-args",
-            "--params-file", controllers_yaml_path # Pass the YAML for parameters
+            "--params-file", controllers_yaml_path
         ],
         output="screen",
     )
-    
+
     bridge_params = os.path.join(
         get_package_share_directory(namePackage),
         'config',
@@ -100,7 +127,7 @@ def generate_launch_description():
         ],
         output='screen'
     )
-    
+
     # Declare the launch argument
     declared_arguments = []
     declared_arguments.append(
@@ -111,15 +138,20 @@ def generate_launch_description():
         )
     )
 
+    # Modify move_group_launch_include to prevent spawning controllers
     move_group_launch_include = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             FindPackageShare('kinova_arm'),
             '/launch/move_group.launch.py'
         ]),
-        launch_arguments={'use_sim_time': use_sim_time}.items(),
+        launch_arguments={
+            'use_sim_time': use_sim_time,
+            'load_controllers': 'false'
+        }.items(),
     )
 
     launchDescriptionObject = LaunchDescription()
+    launchDescriptionObject.add_action(set_gazebo_models)
     launchDescriptionObject.add_action(DeclareLaunchArgument(
             'use_sim_time',
             default_value='true',
@@ -127,7 +159,7 @@ def generate_launch_description():
     launchDescriptionObject.add_action(gazeboLaunch)
     launchDescriptionObject.add_action(robotStatePublisher)
     launchDescriptionObject.add_action(spawnModelGazebo)
-    
+
     # Add event handlers to spawn controllers after the model is spawned in Gazebo,
     # ensuring the /controller_manager service from gz_ros2_control is likely available.
     launchDescriptionObject.add_action(RegisterEventHandler(
@@ -138,10 +170,10 @@ def generate_launch_description():
     ))
     launchDescriptionObject.add_action(RegisterEventHandler(
         event_handler=OnProcessExit(
-            # Spawn arm_controller after joint_state_broadcaster_spawner finishes (or also after spawnModelGazebo)
-            # target_action=joint_state_broadcaster_spawner, 
-            target_action=spawnModelGazebo, # Let's try spawning them in parallel after model spawn
-            on_exit=[arm_controller_spawner],
+            # Spawn arm_controller after joint_state_broadcaster_spawner finishes
+            target_action=joint_state_broadcaster_spawner,
+            # target_action=spawnModelGazebo, # Let's try spawning them in parallel after model spawn
+            on_exit=[TimerAction(period=2.0, actions=[arm_controller_spawner])], # Delay arm_controller
         )
     ))
 
