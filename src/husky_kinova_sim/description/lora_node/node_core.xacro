@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot name="node" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="node_name" default="node" />
+  <xacro:arg name="rf_address" default="2" />
+
+  <link name="$(arg node_name)/base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+  <gazebo>
+    <plugin filename="gz-sim-comms-endpoint-system" name="gz::sim::systems::CommsEndpoint">
+      <address>$(arg rf_address)</address>
+      <topic>/model/$(arg node_name)/rx</topic>
+    </plugin>
+  </gazebo>
+
+</robot>
