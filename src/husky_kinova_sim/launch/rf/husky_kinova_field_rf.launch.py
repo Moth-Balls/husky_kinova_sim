@@ -232,7 +232,7 @@ def generate_launch_description():
     ))
     launchDescriptionObject.add_action(RegisterEventHandler(
         event_handler=OnProcessExit(
-            # Spawn arm_controller after joint_state_broadcaster_spawner finishes
+            # Spawn arm_controller after joint_state_broadcaster_spawner finishes 
             target_action=joint_state_broadcaster_spawner,
             # target_action=spawnModelGazebo, # Let's try spawning them in parallel after model spawn
             on_exit=[TimerAction(period=2.0, actions=[arm_controller_spawner])], # Delay arm_controller
