@@ -102,7 +102,7 @@ def generate_launch_description():
         output="screen",
     )
 
-    # Spawner for Arm Controller ( delayed)
+    # Spawner for Arm Controller
     arm_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -224,8 +224,6 @@ def generate_launch_description():
         ])
         launchDescriptionObject.add_action(node_group)
 
-    # Add event handlers to spawn controllers after the model is spawned in Gazebo,
-    # ensuring the /controller_manager service from gz_ros2_control is likely available.
     launchDescriptionObject.add_action(RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=spawnModelGazebo,
