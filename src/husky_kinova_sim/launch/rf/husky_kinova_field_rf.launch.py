@@ -110,7 +110,7 @@ def generate_launch_description():
             "arm_controller",
             "--controller-manager", "/controller_manager",
             "--ros-args",
-            "-- params-file", controllers_yaml_path
+            "--params-file", controllers_yaml_path
         ],
         output="screen",
     )
