@@ -1,5 +1,6 @@
 # husky_kinova_sim
-Simple simulator for Clearpath Husky A200 equipped with a Kinova Gen3 arm, Velodyne VLP 16 lidar, and Omni 60 camera. Includes a [Virtual Maize Field](https://github.com/FieldRobotEvent/virtual_maize_field) world.
+Simple simulator for Clearpath Husky A200 equipped with a Kinova Gen3 arm, Velodyne VLP 16 lidar, and Omni 60 camera. Includes a [Virtual Maize Field](https://github.com/FieldRobotEvent/virtual_maize_field) world. 
+#### This specific branch has a simulated LoRa node in the crop row. This is for research.
 
 This is not meant to fully replace the [Clearpath Simulator](https://docs.clearpathrobotics.com/docs/ros/tutorials/simulator/overview) but it reduces the abstraction considerably.
 
@@ -68,6 +69,7 @@ Launching:
 ```shell
 ros2 launch husky_kinova_sim husky_kinova_field.launch.py
 ```
+
 
 
 
